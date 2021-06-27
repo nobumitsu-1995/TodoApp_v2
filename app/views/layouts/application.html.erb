@@ -11,6 +11,32 @@
   </head>
 
   <body>
-    <%= yield %>
+    <header class="navbar navbar-expand-sm navbar-light bg-light">
+      <div class="container">
+        <%= link_to "TodoApp", root_path, class: "navbar-brand" %>
+        <ul class="navbar-nav">
+          <% if logged_in? %>
+            <li class="nav-item"><%= link_to "#{current_user.name}", user_path(current_user.id), class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "ログアウト", logout_path, method: :delete, class: "nav-link" %></li>
+          <% else %>
+            <li class="nav-item"><%= link_to "新規登録", new_user_path, class: "nav-link" %></li>
+            <li class="nav-item"><%= link_to "ログイン", login_form_path, class: "nav-link" %></li>
+          <% end %>
+        </ul>
+      </div>
+    </header>
+    <div class="container">
+      <% if flash[:notice] %>
+        <div class="alert alert-success">
+          <%= flash[:notice] %>
+        </div>
+      <% end %>
+      <% if flash[:alert] %>
+        <div class="alert alert-danger">
+          <%= flash[:alert] %>
+        </div>
+      <% end %>
+      <%= yield %>
+    </div>
   </body>
 </html>

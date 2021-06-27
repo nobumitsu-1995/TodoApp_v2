@@ -1,0 +1,17 @@
+<%= form_with(url: login_path, method: :post, local: false) do |form| %>
+  <div id="error" >
+  </div>
+  <div class="field">
+    <%= form.label :email, "メールアドレス" %>
+    <%= form.text_field :email %>
+  </div>
+
+  <div class="field">
+    <%= form.label :password, "パスワード" %>
+    <%= form.text_field :password %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit "ログイン" %>
+  </div>
+<% end %>
