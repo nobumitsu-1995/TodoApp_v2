@@ -8,3 +8,6 @@ ja:
         email: メールアドレス
         password: パスワード
         image: プロフィール画像
+      todo:
+        content: 内容
+        deadline_time: 締切日時

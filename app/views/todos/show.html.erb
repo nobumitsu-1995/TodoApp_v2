@@ -1,0 +1,10 @@
+<h1>Todo詳細</h1>
+<ul>
+  <li>
+    締切日時：<%= l(@todo.deadline_time) %>
+  </li>
+  <li>
+    todo内容：<%= @todo.content %>
+  </li>
+</ul>
+<%= link_to "back", todos_path %>
