@@ -2,6 +2,8 @@ class Todo < ApplicationRecord
   belongs_to :user
   validates :content, length: { maximum: 200}, presence: true
   validates :start_time, presence: true
+  validates :status, presence: true
+  validates :user_id, presence: true
   enum status: {
     on_going: 0,
     completed: 1
