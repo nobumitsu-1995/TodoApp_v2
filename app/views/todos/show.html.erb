@@ -1,10 +1,25 @@
-<h1>Todo詳細</h1>
-<ul>
-  <li>
-    締切日時：<%= l(@todo.deadline_time) %>
-  </li>
-  <li>
-    todo内容：<%= @todo.content %>
-  </li>
-</ul>
-<%= link_to "back", todos_path %>
+<h1 class="text-center my-3">Todo詳細</h1>
+<div class="card mx-auto" style="width: 24rem;">
+  <div class="card-body">
+    <h4 class="card-text text-center">
+      <%= @todo.content %>
+    </h4>
+  </div>
+  <ul class="list-group list-group-flush">
+    <hr>
+    <li class="list-group-item">進行状態：<%= @todo.status_i18n %></li>
+    <li class="list-group-item">開始日時：<%= l(@todo.start_time) %></li>
+    <%= deadline_time_data(@todo) %>
+    <%= end_time_data(@todo) %>
+    <%= working_time_data(@todo) %>
+    <%= overdue_time_data(@todo) %>
+  </ul>
+  <div class="card-body d-flex">
+    <li><%= link_to "編集", edit_todo_path(@todo), class: "mr-2" %></li>
+    <li><%= link_to "削除", todo_path(@todo), class: "mr-2", method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
+    <li><%= complete_link(@todo) %></li>
+  </div>
+</div>
+<div class="text-center mt-3">
+  <%= link_to "back", todos_path %>
+</div>

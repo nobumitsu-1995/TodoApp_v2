@@ -2,6 +2,7 @@ ja:
   activerecord:
     models:
       user: ユーザー
+      todo: Todo
     attributes:
       user:
         name: 名前
@@ -11,3 +12,12 @@ ja:
       todo:
         content: 内容
         deadline_time: 締切日時
+        start_time: 開始時間
+  enums:
+    todo:
+      status:
+        on_going: 進行中
+        completed: 完了済み
+  time:
+    formats:
+      default: "%Y/%m/%d %H:%M"

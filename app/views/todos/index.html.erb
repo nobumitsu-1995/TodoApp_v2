@@ -1,28 +1,132 @@
-<h1>TODO LIST</h1>
-<div>
-  <%= link_to "新規todoを作成", new_todo_path %>
+<h1 class="mt-3 text-center">TODO LIST</h1>
+<div class="mb-3 text-right">
+  <%= link_to "新規todoを作成", new_todo_path, class: "btn btn-danger btn-lg" %>
 </div>
-<table class="table table-dark">
-  <thead>
-    <tr>
-      <th scope="col">締め切り</th>
-      <th scope="col">やること</th>
-      <th scope="col">操作</th>
-    </tr>
-  </thead>
-  <tbody>
-    <% @todos.each do |todo| %>
-      <tr>
-        <td><%= l(todo.deadline_time) %></td>
-        <td><%= link_to "#{todo.content}", todo %></td>
-        <td>
-          <ul class="d-flex">
-            <li><%= link_to "編集", edit_todo_path(todo) %></li>
-            <li><%= link_to "削除", todo_path(todo), method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
-            <li>完了</li>
-          </ul>
-        </td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<ul class="nav nav-tabs nav-pills nav-fill" id="TodoTable" role="tablist">
+  <li class="nav-item">
+    <a class="nav-link active" id="on_going_todos-tab" data-toggle="tab" href="#on_going_todos" role="tab" aria-controls="on_going_todos" aria-selected="true">進行中のTodo</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="no_deadline_todos-tab" data-toggle="tab" href="#no_deadline_todos" role="tab" aria-controls="no_deadline_todos" aria-selected="false">締切なしのTodo</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="overdue_deadline_todos-tab" data-toggle="tab" href="#overdue_deadline_todos" role="tab" aria-controls="overdue_deadline_todos" aria-selected="false">締切超過Todo</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link" id="completed_todos-tab" data-toggle="tab" href="#completed_todos" role="tab" aria-controls="completed_todos" aria-selected="false">完了済みTodo</a>
+  </li>
+</ul>
+<div class="tab-content" id="TodoTableContent">
+  <div class="tab-pane fade show active" id="on_going_todos" role="tabpanel" aria-labelledby="on_going_todos-tab">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th class="col-3" scope="col">締め切り</th>
+          <th scope="col">やること</th>
+          <th class="col-2 text-center" scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @on_going_todos.each do |todo| %>
+          <tr>
+            <td>
+              <% if todo.deadline_time %>
+                <%= l(todo.deadline_time) %>
+              <% end %>
+            </td>
+            <td><%= link_to "#{todo.content}", todo %></td>
+            <td>
+              <ul class="d-flex">
+                <li><%= link_to "編集", edit_todo_path(todo), class: "mr-2" %></li>
+                <li><%= link_to "削除", todo_path(todo), class: "mr-2", method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
+                <li><%= link_to "完了", todo_complete_index_path(todo), method: :post, data: {confirm: "Todoを完了します。"} %></li>
+              </ul>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane fade" id="no_deadline_todos" role="tabpanel" aria-labelledby="no_deadline_todos-tab">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th scope="col">やること</th>
+          <th class="col-2 text-center" scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @no_deadline_todos.each do |todo| %>
+          <tr>
+            <td><%= link_to "#{todo.content}", todo %></td>
+            <td>
+              <ul class="d-flex">
+                <li><%= link_to "編集", edit_todo_path(todo), class: "mr-2" %></li>
+                <li><%= link_to "削除", todo_path(todo), class: "mr-2", method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
+                <li><%= link_to "完了", todo_complete_index_path(todo), method: :post, data: {confirm: "Todoを完了します。"} %></li>
+              </ul>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane fade" id="overdue_deadline_todos" role="tabpanel" aria-labelledby="overdue_deadline_todos-tab">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th class="col-3" scope="col">締め切り</th>
+          <th scope="col">やること</th>
+          <th class="col-2 text-center" scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @overdue_deadline_todos.each do |todo| %>
+          <tr>
+            <td>
+              <%= l(todo.deadline_time) %>
+            </td>
+            <td><%= link_to "#{todo.content}", todo %></td>
+            <td>
+              <ul class="d-flex">
+                <li><%= link_to "編集", edit_todo_path(todo), class: "mr-2" %></li>
+                <li><%= link_to "削除", todo_path(todo), class: "mr-2", method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
+                <li><%= link_to "完了", todo_complete_index_path(todo), method: :post, data: {confirm: "Todoを完了します。"} %></li>
+              </ul>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+  <div class="tab-pane fade" id="completed_todos" role="tabpanel" aria-labelledby="completed_todos-tab">
+    <table class="table table-dark">
+      <thead>
+        <tr>
+          <th class="col-3" scope="col">締め切り</th>
+          <th scope="col">やること</th>
+          <th class="col-2 text-center" scope="col">操作</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% @completed_todos.each do |todo| %>
+          <tr>
+            <td>
+              <% if todo.deadline_time %>
+                <%= l(todo.deadline_time) %>
+              <% end %>
+            </td>
+            <td><%= link_to "#{todo.content}", todo %></td>
+            <td>
+              <ul class="d-flex">
+                <li><%= link_to "編集", edit_todo_path(todo), class: "mr-2" %></li>
+                <li><%= link_to "削除", todo_path(todo), class: "mr-2", method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
+                <li><%= link_to "未完了に戻す", todo_complete_path(todo, 1), method: :delete, data: {confirm: "Todoを未完了に戻します。"} %></li>
+              </ul>
+            </td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</div>

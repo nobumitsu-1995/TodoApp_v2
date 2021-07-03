@@ -1,6 +1,6 @@
 class SessionController < ApplicationController
   skip_before_action :authenticate
-  
+
   def new
   end
 
@@ -8,7 +8,7 @@ class SessionController < ApplicationController
     @user = User.find_by(email: params[:email])
     if @user && @user.authenticate(params[:password])
       session[:user_id] = @user.id
-      redirect_to root_path, notice: "ログインしました。"
+      redirect_to todos_path, notice: "ログインしました。"
     end
   end
 

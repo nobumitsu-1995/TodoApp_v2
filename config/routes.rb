@@ -1,7 +1,9 @@
 Rails.application.routes.draw do
-  resources :users
-  resources :todos
   root "home#index"
+  resources :users
+  resources :todos do
+    resources :complete
+  end
   get "/login_form" => "session#new"
   post "/login" => "session#create"
   delete "/logout" => "session#destroy"

@@ -12,7 +12,7 @@
   <% end %>
   <div class="field">
     <%= form.label :deadline_time %>
-    <%= form.datetime_select :deadline_time %>
+    <%= form.datetime_select :deadline_time, include_blank: true, selected: Time.zone.now %>
   </div>
 
   <div class="field">

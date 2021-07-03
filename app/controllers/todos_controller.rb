@@ -2,7 +2,11 @@ class TodosController < ApplicationController
   before_action :set_todo, only: %i[ show edit update destroy ]
 
   def index
-    @todos = Todo.where(user_id: @current_user.id).order(:deadline_time)
+    todos = Todo.all_todos(@current_user)
+    @on_going_todos = todos.on_going_todos
+    @no_deadline_todos = @on_going_todos.no_deadline
+    @overdue_deadline_todos = @on_going_todos.overdue_deadline
+    @completed_todos = todos.completed_todos
   end
 
   def show
@@ -19,7 +23,7 @@ class TodosController < ApplicationController
     @todo = current_user.todos.build(todo_params)
     Todo.set_status(@todo)
     if @todo.save
-      redirect_to @todo, notice: "作成しました。"
+      redirect_to todos_path, notice: "作成しました。"
     else
       render :new, status: :unprocessable_entity
     end
