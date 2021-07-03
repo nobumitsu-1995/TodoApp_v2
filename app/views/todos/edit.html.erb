@@ -1,5 +1,7 @@
-<h1>Todo編集</h1>
+<h1 class="text-center my-3">Todo編集</h1>
 <%= render 'form', todo: @todo %>
 
-<%= link_to "show", @todo %>
-<%= link_to "back", todos_path %>
+<div class="text-center mt-3">
+  <%= link_to "show", @todo %> |
+  <%= link_to "back", todos_path %>
+</div>

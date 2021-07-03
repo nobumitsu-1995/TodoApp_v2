@@ -2,11 +2,7 @@ class TodosController < ApplicationController
   before_action :set_todo, only: %i[ show edit update destroy ]
 
   def index
-    todos = Todo.all_todos(@current_user)
-    @on_going_todos = todos.on_going_todos
-    @no_deadline_todos = @on_going_todos.no_deadline
-    @overdue_deadline_todos = @on_going_todos.overdue_deadline
-    @completed_todos = todos.completed_todos
+    @todos = Todo.all_todos(@current_user)
   end
 
   def show

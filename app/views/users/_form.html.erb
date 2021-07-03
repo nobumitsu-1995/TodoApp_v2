@@ -1,6 +1,6 @@
 <%= form_with(model: @user) do |form| %>
   <% if user.errors.any? %>
-    <div id="error_explanation">
+    <div id="error_explanation" class="mx-auto">
       <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
 
       <ul>
@@ -10,28 +10,27 @@
       </ul>
     </div>
   <% end %>
-
-  <div class="field">
-    <%= form.label :name %>
-    <%= form.text_field :name %>
-  </div>
-
-  <div class="field">
-    <%= form.label :email %>
-    <%= form.text_field :email %>
-  </div>
-
-  <div class="field">
-    <%= form.label :password %>
-    <%= form.text_field :password %>
-  </div>
-
-  <div class="field">
-    <%= form.label :image %>
-    <%= form.text_field :image %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit %>
+  <div class="card mx-auto" style="width: 24rem;">
+    <div class="card-body mt-3">
+      <div class="field card-text">
+        <%= form.label :name %>
+        <%= form.text_field :name %>
+      </div>
+      <div class="field card-text">
+        <%= form.label :email %>
+        <%= form.text_field :email %>
+      </div>
+      <div class="field card-text">
+        <%= form.label :password %>
+        <%= form.text_field :password %>
+      </div>
+      <div class="field card-text">
+        <%= form.label :image %>
+        <%= form.text_field :image %>
+      </div>
+    </div>
+    <div class="card-body text-right">
+      <%= form.submit class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

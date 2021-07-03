@@ -23,11 +23,11 @@
         <tr>
           <th class="col-3" scope="col">締め切り</th>
           <th scope="col">やること</th>
-          <th class="col-2 text-center" scope="col">操作</th>
+          <th class="col-3 text-center" scope="col">操作</th>
         </tr>
       </thead>
       <tbody>
-        <% @on_going_todos.each do |todo| %>
+        <% @todos.on_going_todos.each do |todo| %>
           <tr>
             <td>
               <% if todo.deadline_time %>
@@ -36,7 +36,7 @@
             </td>
             <td><%= link_to "#{todo.content}", todo %></td>
             <td>
-              <ul class="d-flex">
+              <ul class="d-flex justify-content-center">
                 <li><%= link_to "編集", edit_todo_path(todo), class: "mr-2" %></li>
                 <li><%= link_to "削除", todo_path(todo), class: "mr-2", method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
                 <li><%= link_to "完了", todo_complete_index_path(todo), method: :post, data: {confirm: "Todoを完了します。"} %></li>
@@ -52,15 +52,15 @@
       <thead>
         <tr>
           <th scope="col">やること</th>
-          <th class="col-2 text-center" scope="col">操作</th>
+          <th class="col-3 text-center" scope="col">操作</th>
         </tr>
       </thead>
       <tbody>
-        <% @no_deadline_todos.each do |todo| %>
+        <% @todos.on_going_todos.no_deadline.each do |todo| %>
           <tr>
             <td><%= link_to "#{todo.content}", todo %></td>
             <td>
-              <ul class="d-flex">
+              <ul class="d-flex justify-content-center">
                 <li><%= link_to "編集", edit_todo_path(todo), class: "mr-2" %></li>
                 <li><%= link_to "削除", todo_path(todo), class: "mr-2", method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
                 <li><%= link_to "完了", todo_complete_index_path(todo), method: :post, data: {confirm: "Todoを完了します。"} %></li>
@@ -77,18 +77,18 @@
         <tr>
           <th class="col-3" scope="col">締め切り</th>
           <th scope="col">やること</th>
-          <th class="col-2 text-center" scope="col">操作</th>
+          <th class="col-3 text-center" scope="col">操作</th>
         </tr>
       </thead>
       <tbody>
-        <% @overdue_deadline_todos.each do |todo| %>
+        <% @todos.on_going_todos.overdue_deadline.each do |todo| %>
           <tr>
             <td>
               <%= l(todo.deadline_time) %>
             </td>
             <td><%= link_to "#{todo.content}", todo %></td>
             <td>
-              <ul class="d-flex">
+              <ul class="d-flex justify-content-center">
                 <li><%= link_to "編集", edit_todo_path(todo), class: "mr-2" %></li>
                 <li><%= link_to "削除", todo_path(todo), class: "mr-2", method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
                 <li><%= link_to "完了", todo_complete_index_path(todo), method: :post, data: {confirm: "Todoを完了します。"} %></li>
@@ -105,11 +105,11 @@
         <tr>
           <th class="col-3" scope="col">締め切り</th>
           <th scope="col">やること</th>
-          <th class="col-2 text-center" scope="col">操作</th>
+          <th class="col-3 text-center" scope="col">操作</th>
         </tr>
       </thead>
       <tbody>
-        <% @completed_todos.each do |todo| %>
+        <% @todos.completed_todos.each do |todo| %>
           <tr>
             <td>
               <% if todo.deadline_time %>
@@ -118,7 +118,7 @@
             </td>
             <td><%= link_to "#{todo.content}", todo %></td>
             <td>
-              <ul class="d-flex">
+              <ul class="d-flex justify-content-center">
                 <li><%= link_to "編集", edit_todo_path(todo), class: "mr-2" %></li>
                 <li><%= link_to "削除", todo_path(todo), class: "mr-2", method: :delete, data: {confirm: "本当に削除しますか？"} %></li>
                 <li><%= link_to "未完了に戻す", todo_complete_path(todo, 1), method: :delete, data: {confirm: "Todoを未完了に戻します。"} %></li>

@@ -1,17 +1,21 @@
+<h1 class="text-center mt-3">ユーザーログイン</h1>
 <%= form_with(url: login_path, method: :post, local: false) do |form| %>
   <div id="error" >
   </div>
-  <div class="field">
-    <%= form.label :email, "メールアドレス" %>
-    <%= form.text_field :email %>
-  </div>
+  <div class="card mx-auto mt-3" style="width: 24rem;">
+    <div class="card-body">
+      <div class="field card-text">
+        <%= form.label :email, "メールアドレス" %>
+        <%= form.text_field :email %>
+      </div>
 
-  <div class="field">
-    <%= form.label :password, "パスワード" %>
-    <%= form.text_field :password %>
-  </div>
-
-  <div class="actions">
-    <%= form.submit "ログイン" %>
+      <div class="field card-text">
+        <%= form.label :password, "パスワード" %>
+        <%= form.text_field :password %>
+      </div>
+    </div>
+    <div class="card-body text-right">
+      <%= form.submit "ログイン", class: "btn btn-primary" %>
+    </div>
   </div>
 <% end %>

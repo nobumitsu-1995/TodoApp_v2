@@ -1,19 +1,18 @@
-<p id="notice"><%= notice %></p>
 
-<p>
-  <strong>Name:</strong>
-  <%= @user.name %>
-</p>
-
-<p>
-  <strong>Email:</strong>
-  <%= @user.email %>
-</p>
-
-<p>
-  <strong>Image:</strong>
-  <%= @user.image %>
-</p>
-
-<%= link_to 'Edit', edit_user_path(@user) %> |
-<%= link_to 'Back', todos_path %>
+<div class="card mx-auto mt-3" style="width: 20rem;">
+  <img class="bd-placeholder-img card-img-top width="100%" ">
+  <div class="card-body">
+    <p class="card-text">
+      <strong>名前:</strong>
+      <%= @user.name %>
+    </p>
+    <p class="card-text">
+      <strong>メールアドレス:</strong>
+      <%= @user.email %>
+    </p>
+  </div>
+</div>
+<div class="text-center mt-3">
+  <%= link_to 'Edit', edit_user_path(@user) %> |
+  <%= link_to 'Back', todos_path %>
+</div>
