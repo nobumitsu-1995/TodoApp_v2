@@ -16,7 +16,11 @@
         <% if logged_in? %>
           <%= link_to "TodoApp", todos_path, class: "navbar-brand" %>
           <ul class="navbar-nav">
-            <li class="nav-item"><%= link_to "#{current_user.name}", user_path(current_user.id), class: "nav-link" %></li>
+            <li class="nav-item">
+              <%= link_to user_path(current_user.id), class: "nav-link" do %>
+                <%= image_tag current_user.image, class: "", style: "#{image_style(20)}" %> <%= current_user.name %>
+              <% end %>
+            </li>
             <li class="nav-item"><%= link_to "ログアウト", logout_path, method: :delete, class: "nav-link" %></li>
           </ul>
           <% else %>

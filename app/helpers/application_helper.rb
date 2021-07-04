@@ -7,11 +7,15 @@ module ApplicationHelper
       end
     end
 
-    def alert_msg
-      if flash[:alert]
-        content_tag(:div, class: "alert alert-danger") do
-          flash[:alert]
-        end
+  def alert_msg
+    if flash[:alert]
+      content_tag(:div, class: "alert alert-danger") do
+        flash[:alert]
       end
     end
+  end
+
+  def image_style(size)
+    "width: #{size}px; height: #{size}px; border-radius: 100%;"
+  end
 end

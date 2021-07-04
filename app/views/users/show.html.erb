@@ -1,6 +1,8 @@
 
-<div class="card mx-auto mt-3" style="width: 20rem;">
-  <img class="bd-placeholder-img card-img-top width="100%" ">
+<div class="card mx-auto mt-3 text-center" style="width: 20rem;">
+  <div class="bd-placeholder-img card-img-top my-3">
+    <%= image_tag @user.image, class: "", style: "#{image_style(100)}" %>
+  </div>
   <div class="card-body">
     <p class="card-text">
       <strong>名前:</strong>
