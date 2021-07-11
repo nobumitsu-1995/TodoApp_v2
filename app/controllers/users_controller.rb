@@ -19,7 +19,8 @@ class UsersController < ApplicationController
   def create
     @user = User.new(user_params)
     if @user.save
-      redirect_to root_path, notice: "ユーザーを新規作成しました。"
+      session[:user_id] = @user.id
+      redirect_to todos_path, notice: "ユーザーを新規作成しました。"
     else
       render :new, status: :unprocessable_entity
     end
@@ -28,6 +29,7 @@ class UsersController < ApplicationController
   # PATCH/PUT /users/1 or /users/1.json
   def update
     if @user.update(user_params)
+      @user.image.attach(params[:user][:image])
       redirect_to @user, notice: "ユーザー情報を更新しました。"
     else
       render :edit, status: :unprocessable_entity
