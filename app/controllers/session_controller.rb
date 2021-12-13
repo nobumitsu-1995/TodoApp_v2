@@ -2,6 +2,8 @@ class SessionController < ApplicationController
   skip_before_action :authenticate
 
   def new
+    return unless logged_in?
+    redirect_to todos_path
   end
 
   def create
