@@ -1,12 +1,12 @@
 # TodoApp_v2について
 本アプリケーションは、Ruby on Railsを学習した後に初めて1から作成したWebアプリです。Todoの追加、確認、編集、削除、完了等の操作ができる基本的なCRUDアプリになります。
 <br>
-以下の情報でログイン可能です。
-メールアドレス：hoge
+以下の情報でログイン可能です。<br>
+メールアドレス：hoge<br>
 パスワード：hoge
 <br>
 - [アプリケーションURL](https://todo-deadline-management-app.herokuapp.com/todos)
-<img width="1000" alt="ER" src="./public/images/todo.top.png">
+<img width="1000" alt="top画像" src="./public/images/todo_top.png">
 
 ## 実装機能について
 実装されている機能に関しては以下のようになっています。
