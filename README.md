@@ -26,25 +26,25 @@ Todoの個別情報表示ページはhelperを使うことで可読性が高く�
 以下は一例ですが、複雑な時間の計算はhelperに書くことで、viewのコードを一行で済ませることができました。
 ```ruby:todos_helper.rb
 def overdue_time_data(todo)
-<!-- 締め切りが設定されている場合は以下のコードが実行される -->
+# 締め切りが設定されている場合は以下のコードが実行される
   if todo.deadline_time
     case
-<!-- Todoが締め切りを過ぎて完了している場合。-->
+# Todoが締め切りを過ぎて完了している場合。
     when todo.completed? && todo.overdue_deadline?
       content_tag(:li, class: "list-group-item") do
         "超過時間：#{distance_of_time_in_words(todo.deadline_time, todo.end_time)}"
       end
-<!-- Todoが締め切りより早く完了している場合。 -->
+# Todoが締め切りより早く完了している場合。
     when todo.completed? && !(todo.overdue_deadline?)
       content_tag(:li, class: "list-group-item") do
         "残り時間：#{distance_of_time_in_words(todo.deadline_time, todo.end_time)}"
       end
-<!-- Todoが進行中で締め切りが過ぎている場合。 -->
+# Todoが進行中で締め切りが過ぎている場合。
     when !(todo.completed?) && todo.overdue_deadline?
       content_tag(:li, class: "list-group-item") do
         "超過時間：#{time_ago_in_words(todo.deadline_time)}"
       end
-<!-- Todoが進行中で締め切りがまだ過ぎていない場合。 -->
+# Todoが進行中で締め切りがまだ過ぎていない場合。
     when !(todo.completed?) && !(todo.overdue_deadline?)
       content_tag(:li, class: "list-group-item") do
         "残り時間：#{time_ago_in_words(todo.deadline_time)}"
@@ -55,7 +55,7 @@ end
 ```
 
 ```ruby:todos/show.html.erb
-<!-- viewのコードは一行で済む。 -->
+<%# viewのコードは一行で済む。%>
 <%= overdue_time_data(@todo) %>
 ```
 
@@ -64,13 +64,27 @@ end
 Todoの「完了」「未完了」状態はenum型を使用して管理しました。
 ```ruby:models/todo.rb
 enum status: {
-  on_going: 0,
-  completed: 1
+  on_going: 0, # 進行中
+  completed: 1 # 完了済み
 }
 ```
 ![complete_todo](https://user-images.githubusercontent.com/70850598/146749501-d73c8d5e-d82d-41fd-bc6a-b3e565282e0c.gif)<br>
 5. 進行中のTodo、締切なしのTodo、締切超過Todo、完了済みTodoの４つのテーブルに分けてTodoを表示する機能。<br>
 scopeの機能をうまく活用し状態別のTodoを取得するようにしました。
+```ruby:models/todo.rb 
+scope :all_todos, -> (user) { where(user_id: user.id).order(:deadline_time) }   # ログイン中のユーザーの全てのTodo
+scope :on_going_todos, -> { where(status: 0) }                                  # 進行中のTodo
+scope :completed_todos, -> { where(status: 1) }                                 # 完了済みのTodo
+scope :no_deadline, -> { where(deadline_time: nil) }                            # 締め切りが設定されていないTodo
+scope :overdue_deadline, -> { where("deadline_time < ?", Time.zone.now) }       # 締め切りが過ぎているTodo
+```
+
+```ruby:todos/index.html.erb
+<% @todos.on_going_todos.each do |todo| %>                    <% # 進行中のTodo %>
+<% @todos.on_going_todos.no_deadline.each do |todo| %>        <% # 締切なしのTodo %>
+<% @todos.on_going_todos.overdue_deadline.each do |todo| %>   <% # 締切超過Todo %>
+<% @todos.completed_todos.each do |todo| %>                   <% # 完了済みTodo %>
+```
 ![select_table](https://user-images.githubusercontent.com/70850598/146749582-04008429-bdd1-452c-992b-a363ef05c974.gif)
 
 ## データベース設計について
