@@ -11,6 +11,9 @@
     </div>
   <% end %>
   <div class="card mx-auto" style="width: 24rem;">
+  <% if current_user && current_user.email == "hoge" %>
+    <p>※このユーザーはユーザー情報の変更ができません。<p>
+  <% else %>
     <div class="card-body mt-3">
       <div class="field card-text">
         <%= form.label :name %>
@@ -32,5 +35,6 @@
     <div class="card-body text-right">
       <%= form.submit class: "btn btn-primary" %>
     </div>
+  <% end %>
   </div>
 <% end %>
