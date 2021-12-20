@@ -26,20 +26,25 @@ Todoの個別情報表示ページはhelperを使うことで可読性が高く�
 以下は一例ですが、複雑な時間の計算はhelperに書くことで、viewのコードを一行で済ませることができました。
 ```ruby:todos_helper.rb
 def overdue_time_data(todo)
+<!-- 締め切りが設定されている場合は以下のコードが実行される -->
   if todo.deadline_time
     case
+<!-- Todoが締め切りを過ぎて完了している場合。-->
     when todo.completed? && todo.overdue_deadline?
       content_tag(:li, class: "list-group-item") do
         "超過時間：#{distance_of_time_in_words(todo.deadline_time, todo.end_time)}"
       end
+<!-- Todoが締め切りより早く完了している場合。 -->
     when todo.completed? && !(todo.overdue_deadline?)
       content_tag(:li, class: "list-group-item") do
         "残り時間：#{distance_of_time_in_words(todo.deadline_time, todo.end_time)}"
       end
+<!-- Todoが進行中で締め切りが過ぎている場合。 -->
     when !(todo.completed?) && todo.overdue_deadline?
       content_tag(:li, class: "list-group-item") do
         "超過時間：#{time_ago_in_words(todo.deadline_time)}"
       end
+<!-- Todoが進行中で締め切りがまだ過ぎていない場合。 -->
     when !(todo.completed?) && !(todo.overdue_deadline?)
       content_tag(:li, class: "list-group-item") do
         "残り時間：#{time_ago_in_words(todo.deadline_time)}"
@@ -50,6 +55,7 @@ end
 ```
 
 ```ruby:todos/show.html.erb
+<!-- viewのコードは一行で済む。 -->
 <%= overdue_time_data(@todo) %>
 ```
 
