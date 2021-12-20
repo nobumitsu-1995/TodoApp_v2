@@ -26,6 +26,7 @@
 4. Todoを完了、未完了にする機能。<br>
 ![complete_todo](https://user-images.githubusercontent.com/70850598/146749501-d73c8d5e-d82d-41fd-bc6a-b3e565282e0c.gif)
 5. 進行中のTodo、締切なしのTodo、締切超過Todo、完了済みTodoの４つのテーブルに分けてTodoを表示する機能。<br>
+
 ![select_table](https://user-images.githubusercontent.com/70850598/146749582-04008429-bdd1-452c-992b-a363ef05c974.gif)
 
 ## データベース設計について
