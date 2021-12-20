@@ -8,8 +8,8 @@
 - [アプリケーションURL](https://todo-deadline-management-app.herokuapp.com/todos)
 <img width="1000" alt="top画像" src="./public/images/todo_top.png">
 
-## 実装機能、工夫点について
-実装されている機能、工夫点に関しては以下のようになっています。
+## 実装機能について
+実装されている機能に関しては以下のようになっています。
 - メールアドレス、パスワードを利用したログイン機能。
 - ユーザーにアバターを設定する機能。
 - Todoを追加、確認、編集、削除できる機能。
